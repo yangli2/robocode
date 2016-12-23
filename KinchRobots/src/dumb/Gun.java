@@ -10,13 +10,12 @@ public class Gun {
 	}
 	
 	public void run() {
-		double gunDiff = bot.infos[InfoBot.RADAR].info;
-		if (Math.abs(gunDiff) < 0.1) {
-			bot.turnGunRightRadians(gunDiff);
-			bot.fire(1);
-    		bot.infos[InfoBot.GUN].info = 1;
+		if (Math.abs(bot.gunDiff) < 0.1) {
+			bot.setTurnGunRightRadians(bot.gunDiff);
+			bot.setFire(1);
+    		bot.pointingAtEnemy = true;
         } else {
-        	bot.turnGunRightRadians(gunDiff);
+        	bot.setTurnGunRightRadians(bot.gunDiff);
         }
 	}
 }

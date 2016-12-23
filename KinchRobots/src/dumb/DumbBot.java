@@ -1,5 +1,6 @@
 package dumb;
 
+import robocode.HitWallEvent;
 //import org.opencv.core.Core;
 import robocode.ScannedRobotEvent;
 
@@ -21,10 +22,15 @@ public class DumbBot extends InfoBot {
 			radar.run();
 			gun.run();
 			movement.run();
+			execute();
 		}
 	}
 	
 	public void onScannedRobot(ScannedRobotEvent e) {
 		radar.onScannedRobot(e);
+	}
+	
+	public void onHitWall(HitWallEvent e) {
+		movement.onHitWall(e);
 	}
 }

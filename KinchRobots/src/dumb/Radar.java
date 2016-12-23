@@ -5,10 +5,10 @@ import robocode.util.Utils;
 
 public class Radar {
 	private InfoBot bot;
-	
+
 	public Radar(InfoBot newBot) {
 		bot = newBot;
-        bot.setAdjustGunForRobotTurn(true);
+		bot.setAdjustGunForRobotTurn(true);
         bot.setAdjustRadarForGunTurn(true);
 		bot.setTurnRadarLeftRadians(Double.POSITIVE_INFINITY);
 	}
@@ -18,6 +18,7 @@ public class Radar {
 	}
 	
 	public void onScannedRobot(ScannedRobotEvent e){
+		bot.updateEnemyInfo(e);
 		double radarTurn =
 	        // Absolute bearing to target
 	        bot.getHeadingRadians() + e.getBearingRadians()
@@ -25,7 +26,6 @@ public class Radar {
 	        - bot.getRadarHeadingRadians();
 	 
 	    bot.setTurnRadarRightRadians(1.9*Utils.normalRelativeAngle(radarTurn));
-	    bot.infos[InfoBot.RADAR].info = bot.getRadarHeadingRadians() -
-	    		bot.getGunHeadingRadians();
+	    bot.gunDiff = bot.getRadarHeadingRadians() - bot.getGunHeadingRadians();
 	}
 }
